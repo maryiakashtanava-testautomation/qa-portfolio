@@ -25,13 +25,13 @@ jobs:
           playwright install chromium --with-deps
 
       - name: Run smoke tests
-        run: pytest -m smoke --tb=short --headless
+        run: pytest -m smoke --tb=short --tb=short
         env:
           TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
           TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
 
       - name: Run all tests
-        run: pytest --tb=short --headless
+        run: pytest --tb=short --tb=short
         if: always()
         env:
           TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
