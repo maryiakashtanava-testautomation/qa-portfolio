@@ -26,10 +26,16 @@ jobs:
 
       - name: Run smoke tests
         run: pytest -m smoke --tb=short
+        env:
+          TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
+          TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
 
       - name: Run all tests
         run: pytest --tb=short
         if: always()
+        env:
+          TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
+          TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
 
       - name: Upload test report
         uses: actions/upload-artifact@v4
