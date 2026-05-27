@@ -7,7 +7,7 @@ class HomePage(BasePage):
         super().__init__(page)
         self.nav_signup_login = page.locator("a[href='/login']")
         self.nav_logout = page.locator("a[href='/logout']")
-        self.nav_cart = page.locator("a[href='/view_cart']")
+        self.nav_cart = page.locator("#header a[href='/view_cart']")
         self.nav_products = page.locator("a[href='/products']")
         self.slider_section = page.locator("#slider")
         self.features_items = page.locator(".features_items")
@@ -19,6 +19,7 @@ class HomePage(BasePage):
         self.nav_signup_login.click()
 
     def go_to_products(self):
+        self._dismiss_popups()
         self.nav_products.click()
 
     def go_to_cart(self):

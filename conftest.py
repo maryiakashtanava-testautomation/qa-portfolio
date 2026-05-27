@@ -32,6 +32,9 @@ def page(browser: Browser, base_url: str) -> Page:
         viewport={"width": 1280, "height": 720},
     )
     context.set_default_timeout(int(os.getenv("TIMEOUT", "30000")))
+    context.route("**/*doubleclick.net/**", lambda route: route.abort())
+    context.route("**/*googlesyndication.com/**", lambda route: route.abort())
+    context.route("**/*google-analytics.com/**", lambda route: route.abort())
     page = context.new_page()
     yield page
     context.close()
