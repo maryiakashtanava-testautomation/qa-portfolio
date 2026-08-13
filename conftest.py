@@ -10,6 +10,16 @@ def pytest_configure(config):
     os.makedirs("reports", exist_ok=True)
 
 
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    report = outcome.get_result()
+    if report.when == "call" and report.failed:
+        page = item.funcargs.get("page") or item.funcargs.get("authenticated_page")
+        if page:
+            page.screenshot(path=f"reports/{item.name}_failure.png")
+
+
 @pytest.fixture(scope="session")
 def base_url() -> str:
     return os.getenv("BASE_URL", "https://automationexercise.com")
